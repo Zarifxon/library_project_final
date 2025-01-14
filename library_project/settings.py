@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 
+from django.conf import STATICFILES_STORAGE_ALIAS
 from django.conf.global_settings import EMAIL_BACKEND, STATICFILES_DIRS
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount', #ijtimoiy tarmoqlar orqali kirish
     'dj_rest_auth.registration',
+    'whitenoise.runserver_nostatic',
 
 
     #local_apps
@@ -58,6 +60,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -67,6 +70,8 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
 
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'library_project.urls'
 
